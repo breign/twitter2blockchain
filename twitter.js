@@ -44,9 +44,9 @@ var stream = client.stream('statuses/filter', {follow: twitter_account_id });
 stream.on('data', function(event) {
 //    console.log(event);
     if ( event.text.indexOf(twitter_handle_filter) != -1 ) {
-        console.log("Sending to blockchain: "+event.text);
+        console.log("\nSending to blockchain: "+event.text);
         datapay.send({
-          data: ["0x6d02", event.text],
+          data: ["0x6d02", "twitter.com/"+event.user.screen_name+"/status/"+event.id_str+"\r\n"+event.text],
           pay: { key: privateKey }
         });
     }
